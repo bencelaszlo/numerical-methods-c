@@ -4,5 +4,7 @@
 
     void vec_insert(Vec *vector, float element);
 
+    Vec vec_copy(Vec *original_vector);
+
     void vec_free(Vec *vector);
 #endif

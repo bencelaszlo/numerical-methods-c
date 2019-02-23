@@ -16,6 +16,16 @@ void vec_insert(Vec *vector, float element) {
     vector->elements[vector->used++] = element;
 }
 
+Vec vec_copy(Vec *original_vector) {
+    Vec new_vector;
+    vec_init(&new_vector, original_vector->size);
+    
+    for (unsigned i = 0; i < original_vector->used; i++) {
+        vec_insert(&new_vector, original_vector->elements[i]);
+    }
+    return new_vector;
+}
+
 void vec_free(Vec *vector) {
     free(vector->elements);
     vector->elements = NULL;
