@@ -46,19 +46,3 @@ void linear_interpolation_array(float * X, float * Y, Vec *x, Vec *y) {
         y->elements[i] = linear_interpolation(X[higher_bound_index], Y[higher_bound_index], X[lower_bound_index], Y[lower_bound_index], x->elements[i]);
     }
 }
-
-/*int main() {
-    float X[7] = {-250.0, -200.0, -100.0, 0.0, 100.0, 200.0, 250.0};
-    float Y[7] = {0.0, 280.0, 540.0, 640.0, 1200.0, 1600.0, 1800.0};
-    float x[100000] = {
-
-    };
-    float y[100000];
-    linear_interpolation_array(X, Y, x, y, 100000);
-    for (int j = 0; j < (sizeof(y) / sizeof(y[0]) ); j++) {
-        printf("%f\n", y[j]);
-    }
-
-    return 0;
-}*/
-
