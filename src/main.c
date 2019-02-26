@@ -75,6 +75,26 @@ int main() {
         printf("%f\n", test_vec.elements[k]);
     }
 
+    printf("\nHeap sort\n");
+    vec_free(&test_vec);
+
+    vec_init(&test_vec, 9);
+    vec_insert(&test_vec, 6.4);
+    vec_insert(&test_vec, -0.21);
+    vec_insert(&test_vec, 3.1415926);
+    vec_insert(&test_vec, 4.2);
+    vec_insert(&test_vec, 2.225);
+    vec_insert(&test_vec, 2.3);
+    vec_insert(&test_vec, 1.2);
+    vec_insert(&test_vec, 2.4);
+    vec_insert(&test_vec, 5.2);
+
+    heapsort(test_vec.used, &test_vec);
+
+    for (unsigned k = 0; k < test_vec.used; k++) {
+        printf("%f\n", test_vec.elements[k]);
+    }
+
 
     return 0;
 }

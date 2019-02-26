@@ -1,14 +1,53 @@
 #include "vec.h"
 
+#include <stdio.h> //debug only
+
 #define SWAP(T, a, b) do { T tmp = a; a = b; b = tmp; } while (0)
 
-void shell_sort(int n, Vec *a) {
+void heapify(Vec *a, unsigned n, unsigned i) {
+    unsigned largest = i;
+    unsigned l = 2 * i + 1;
+    unsigned r = 2 * i + 2;
+
+    if ( (r < n) && (a->elements[i] < a->elements[l]) ) {
+        largest = l;
+    }
+
+    if ( (r < n) && (a->elements[largest] < a->elements[r]) ) {
+        largest = r;
+    }
+
+    if (largest != i) {
+        SWAP(float, a->elements[largest], a->elements[i]);
+
+        heapify(a, n, largest);
+    }
+}
+
+void heapsort(unsigned n, Vec *a) {
+    // Build a maxheap
+    unsigned i = n;
+    while (i > 0) {
+        heapify(a, n, i);
+        i -= 1;
+    }
+
+    // One by one extract elements
+    i = n - 1;
+    while (i > 0) {
+        SWAP(float, a->elements[0], a->elements[i]);
+        heapify(a, i ,0);
+        i -= 1;
+    }
+}
+
+void shell_sort(unsigned n, Vec *a) {
     int gap = (n / 2);
     float temp;
     int j;
 
     while (gap > 0) {
-        for (int i = gap; i < n; i++) {
+        for (unsigned i = gap; i < n; i++) {
             temp = a->elements[i];
             
             j = i;
