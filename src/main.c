@@ -14,12 +14,12 @@ int main() {
     float y_known[7] = {0.0, 280.0, 540.0, 640.0, 1200.0, 1600.0, 1800.0};
 
     Vec x;
-    x = file_read("input_data.txt");
+    x = file_read("input.txt");
 
     printf("Linear interpolation\n");
 
-    Vec y;
-    y = vec_copy(&x);
+   	Vec y;
+   	y = vec_copy(&x);
 
     linear_interpolation_array(x_known, y_known, &x, &y);
 
@@ -31,16 +31,7 @@ int main() {
     printf("SORTING\n");
 
     Vec test_vec;
-    vec_init(&test_vec, 9);
-    vec_insert(&test_vec, 6.4);
-    vec_insert(&test_vec, -0.21);
-    vec_insert(&test_vec, 3.1415926);
-    vec_insert(&test_vec, 4.2);
-    vec_insert(&test_vec, 2.225);
-    vec_insert(&test_vec, 2.3);
-    vec_insert(&test_vec, 1.2);
-    vec_insert(&test_vec, 2.4);
-    vec_insert(&test_vec, 5.2);
+    test_vec = file_read("input.txt");
     
     for (unsigned k = 0; k < test_vec.used; k++) {
         printf("%f\n", test_vec.elements[k]);
@@ -48,8 +39,7 @@ int main() {
 
     printf("\n\n\n");
     printf("Shell sort\n");
-    
-    shell_sort(test_vec.used, &test_vec);
+   shell_sort(test_vec.used, &test_vec);
 
     for (unsigned k = 0; k < test_vec.used; k++) {
         printf("%f\n", test_vec.elements[k]);
@@ -57,44 +47,55 @@ int main() {
 
     printf("\nQuicksort\n");
     vec_free(&test_vec);
-
-    vec_init(&test_vec, 9);
-    vec_insert(&test_vec, 6.4);
-    vec_insert(&test_vec, -0.21);
-    vec_insert(&test_vec, 3.1415926);
-    vec_insert(&test_vec, 4.2);
-    vec_insert(&test_vec, 2.225);
-    vec_insert(&test_vec, 2.3);
-    vec_insert(&test_vec, 1.2);
-    vec_insert(&test_vec, 2.4);
-    vec_insert(&test_vec, 5.2);
-
+    test_vec = file_read("input.txt");
+	
     quicksort(0, (test_vec.used-1), &test_vec);
-
+	
     for (unsigned k = 0; k < test_vec.used; k++) {
         printf("%f\n", test_vec.elements[k]);
     }
 
     printf("\nHeap sort\n");
     vec_free(&test_vec);
-
-    vec_init(&test_vec, 9);
-    vec_insert(&test_vec, 6.4);
-    vec_insert(&test_vec, -0.21);
-    vec_insert(&test_vec, 3.1415926);
-    vec_insert(&test_vec, 4.2);
-    vec_insert(&test_vec, 2.225);
-    vec_insert(&test_vec, 2.3);
-    vec_insert(&test_vec, 1.2);
-    vec_insert(&test_vec, 2.4);
-    vec_insert(&test_vec, 5.2);
-
+    test_vec = file_read("input.txt");
+	
     heapsort(test_vec.used, &test_vec);
-
+	
     for (unsigned k = 0; k < test_vec.used; k++) {
         printf("%f\n", test_vec.elements[k]);
     }
 
+    printf("\n\n\n");
+    printf("INTEGRATION OF FUNCTIONS\n");
+
+    printf("\nTrapedozial Rule\n");
+    printf("%f\n", q_trapedozial_rule(0, 3.0f, 40) );
+
+    printf("\nIterative Trapedozial Rule\n");
+    Vec_int j_max;
+    j_max = file_read_int("input.txt");
+    Vec result_vec;
+    vec_init(&result_vec, j_max.used);
+    q_trapedozial_rule_vec(0, 3.0f, &j_max, &result_vec);
+
+    for (unsigned k = 0; k < result_vec.used; k++) {
+        printf("%f\n", result_vec.elements[k]);
+    }
+
+    printf("\nSimpson's Rule\n");
+    printf("%f\n", q_simpsons_rule(0, 3.0f, 40) );
+
+    printf("\nIterative Simpson's Rule\n");
+    vec_free(&result_vec);
+    vec_init(&result_vec, j_max.used);
+    q_simpsons_rule_vec(0, 3.0f, &j_max, &result_vec);
+
+    for (unsigned k = 0; k < result_vec.used; k++) {
+        printf("%f\n", result_vec.elements[k]);
+    }
+
+    printf("\nGauss-Legendre\n");
+    printf("%f\n", q_gauss_legendre(0, 3.0f) );
 
     return 0;
 }
