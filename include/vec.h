@@ -7,4 +7,10 @@
         size_t used;
         size_t size;
     } Vec;
+
+    typedef struct Vec_int {
+        int *elements;
+        size_t used;
+        size_t size;
+    } Vec_int;
 #endif
