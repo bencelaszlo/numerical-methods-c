@@ -1,7 +1,5 @@
 #include "vec.h"
 
-#include <stdio.h> //debug only
-
 #define SWAP(T, a, b) do { T tmp = a; a = b; b = tmp; } while (0)
 
 void heapify(Vec *a, unsigned n, unsigned i) {
