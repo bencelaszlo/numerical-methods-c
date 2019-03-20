@@ -19,7 +19,7 @@ float linear_interpolation(float x1, float y1, float x0, float y0, float x) {
 void linear_interpolation_array(float * X, float * Y, Vec *x, Vec *y) {
     int X_length = sizeof(X);
 
-    for (unsigned i = 0; i < x->size; i++) {
+    for (unsigned i = 0; i < x->capacity; i++) {
         int lower_bound_index = 0;
         int higher_bound_index = 0;
 

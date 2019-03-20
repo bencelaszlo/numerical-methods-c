@@ -44,7 +44,7 @@ float q_trapedozial_rule(float a, float b, int j_max) {
 }
 
 void q_trapedozial_rule_vec(float a, float b, Vec_int *j_max_vec, Vec *result_vec) {
-	for (unsigned i = 0; i < j_max_vec->used; i++) {
+	for (unsigned i = 0; i < j_max_vec->len; i++) {
 		vec_insert(result_vec, q_trapedozial_rule(a, b, j_max_vec->elements[i]) );
 	}
 }
@@ -76,7 +76,7 @@ float q_simpsons_rule(float a, float b, int j_max) {
 }
 
 void q_simpsons_rule_vec(float a, float b, Vec_int *j_max_vec, Vec *result_vec) {
-	for (unsigned i = 0; i < j_max_vec->used; i++) {
+	for (unsigned i = 0; i < j_max_vec->len; i++) {
 		vec_insert(result_vec, q_simpsons_rule(a, b, j_max_vec->elements[i]) );
 	}
 }

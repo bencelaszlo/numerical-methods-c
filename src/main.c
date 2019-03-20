@@ -23,7 +23,7 @@ int main() {
 
     linear_interpolation_array(x_known, y_known, &x, &y);
 
-    for (unsigned i = 0; i < x.used; i++) {
+    for (unsigned i = 0; i < x.capacity; i++) {
         printf("%f\n", y.elements[i]);
     }
 
@@ -33,15 +33,15 @@ int main() {
     Vec test_vec;
     test_vec = file_read("input.txt");
     
-    for (unsigned k = 0; k < test_vec.used; k++) {
+    for (unsigned k = 0; k < test_vec.capacity; k++) {
         printf("%f\n", test_vec.elements[k]);
     }
 
     printf("\n\n\n");
     printf("Shell sort\n");
-   shell_sort(test_vec.used, &test_vec);
+    shell_sort(test_vec.capacity, &test_vec);
 
-    for (unsigned k = 0; k < test_vec.used; k++) {
+    for (unsigned k = 0; k < test_vec.capacity; k++) {
         printf("%f\n", test_vec.elements[k]);
     }
 
@@ -49,9 +49,9 @@ int main() {
     vec_free(&test_vec);
     test_vec = file_read("input.txt");
 	
-    quicksort(0, (test_vec.used-1), &test_vec);
+    quicksort(0, (test_vec.capacity-1), &test_vec);
 	
-    for (unsigned k = 0; k < test_vec.used; k++) {
+    for (unsigned k = 0; k < test_vec.capacity; k++) {
         printf("%f\n", test_vec.elements[k]);
     }
 
@@ -59,9 +59,9 @@ int main() {
     vec_free(&test_vec);
     test_vec = file_read("input.txt");
 	
-    heapsort(test_vec.used, &test_vec);
+    heapsort(test_vec.capacity, &test_vec);
 	
-    for (unsigned k = 0; k < test_vec.used; k++) {
+    for (unsigned k = 0; k < test_vec.capacity; k++) {
         printf("%f\n", test_vec.elements[k]);
     }
 
@@ -75,10 +75,10 @@ int main() {
     Vec_int j_max;
     j_max = file_read_int("input.txt");
     Vec result_vec;
-    vec_init(&result_vec, j_max.used);
+    vec_init(&result_vec, j_max.capacity);
     q_trapedozial_rule_vec(0, 3.0f, &j_max, &result_vec);
 
-    for (unsigned k = 0; k < result_vec.used; k++) {
+    for (unsigned k = 0; k < result_vec.capacity; k++) {
         printf("%f\n", result_vec.elements[k]);
     }
 
@@ -87,10 +87,10 @@ int main() {
 
     printf("\nIterative Simpson's Rule\n");
     vec_free(&result_vec);
-    vec_init(&result_vec, j_max.used);
+    vec_init(&result_vec, j_max.capacity);
     q_simpsons_rule_vec(0, 3.0f, &j_max, &result_vec);
 
-    for (unsigned k = 0; k < result_vec.used; k++) {
+    for (unsigned k = 0; k < result_vec.capacity; k++) {
         printf("%f\n", result_vec.elements[k]);
     }
 
