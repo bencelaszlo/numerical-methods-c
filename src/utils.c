@@ -25,9 +25,8 @@ Vec file_read(char file_path[]) {
     return input_numbers;
 }
 
-Vec_int file_read_int(char file_path[]) {
-    Vec_int input_numbers;
-    vec_init_int(&input_numbers, 1);
+int file_read_int(char file_path[]) {
+    int read_number;
 
     FILE *fp;
 
@@ -36,15 +35,13 @@ Vec_int file_read_int(char file_path[]) {
         printf("File read error.");
     }
 
-    int temp_number;
     while(!feof(fp) ) {
-        fscanf(fp, "%d", &temp_number);
-        vec_insert_int(&input_numbers, temp_number);
+        fscanf(fp, "%d", &read_number);
     }
 
     fclose(fp);
 
-    return input_numbers;
+    return read_number;
 }
 
 float abs_float(float number) {

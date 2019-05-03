@@ -7,10 +7,4 @@
         size_t len;
         size_t capacity;
     } Vec;
-
-    typedef struct Vec_int {
-        int *elements;
-        size_t len;
-        size_t capacity;
-    } Vec_int;
 #endif

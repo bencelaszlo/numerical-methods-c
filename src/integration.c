@@ -3,7 +3,7 @@
 #include "utils.h"
 
 float parameter_function(float x) {
-    return x * x; //Define a parameter function here.
+    return x * x - 1.0f; //Define a parameter function here.
 }
 
 float trapedozial_rule(float a, float b, int n) {
@@ -23,7 +23,7 @@ float trapedozial_rule(float a, float b, int n) {
 }
 
 float q_trapedozial_rule(float a, float b, int j_max) {
-    const float EPS = 0.00001; //accurancy
+    const float EPS = 0.00000001; //accurancy
     const int J_MIN_ITERATION_COUNT = 5;
 
     float s = 0.0;
@@ -32,7 +32,7 @@ float q_trapedozial_rule(float a, float b, int j_max) {
     olds = -0.00000000000000000000000000001;
     for (int j = 0; j < j_max; j++) {
         s = trapedozial_rule(a, b, j);
-        if (j < J_MIN_ITERATION_COUNT) {
+        if (j > J_MIN_ITERATION_COUNT) {
             if (abs_float(s - olds) < EPS * abs_float(olds) ) {
                 if ( (s == 0.0) && (olds == 0.0) ) {
                     return s;
@@ -43,14 +43,8 @@ float q_trapedozial_rule(float a, float b, int j_max) {
     return s;
 }
 
-void q_trapedozial_rule_vec(float a, float b, Vec_int *j_max_vec, Vec *result_vec) {
-	for (unsigned i = 0; i < j_max_vec->len; i++) {
-		vec_insert(result_vec, q_trapedozial_rule(a, b, j_max_vec->elements[i]) );
-	}
-}
-
 float q_simpsons_rule(float a, float b, int j_max) {
-    const float EPS = 0.00001; //accurancy
+    const float EPS = 0.00000001; //accurancy
     const int J_MIN_ITERATION_COUNT = 5;
 
     float s = 0.0;
@@ -64,7 +58,7 @@ float q_simpsons_rule(float a, float b, int j_max) {
     for (int j = 0; j < j_max; j++) {
         st = trapedozial_rule(a, b, j);
         s = (4.0 * st - ost) / 3.0;
-        if (j < J_MIN_ITERATION_COUNT) {
+        if (j > J_MIN_ITERATION_COUNT) {
             if (abs_float(s - os) < EPS * abs_float(os) || (s == 0.0 && os == 0.0) ) {
                 return s;
             }
@@ -73,12 +67,6 @@ float q_simpsons_rule(float a, float b, int j_max) {
         ost = st;
     }
     return s;
-}
-
-void q_simpsons_rule_vec(float a, float b, Vec_int *j_max_vec, Vec *result_vec) {
-	for (unsigned i = 0; i < j_max_vec->len; i++) {
-		vec_insert(result_vec, q_simpsons_rule(a, b, j_max_vec->elements[i]) );
-	}
 }
 
 float q_gauss_legendre(float a, float b) {
