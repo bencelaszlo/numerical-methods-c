@@ -23,7 +23,7 @@ float trapedozial_rule(float a, float b, int n) {
 }
 
 float q_trapedozial_rule(float a, float b, int j_max) {
-    const float EPS = 0.00000001; //accurancy
+    const float EPS = 0.000001; //accurancy
     const int J_MIN_ITERATION_COUNT = 5;
 
     float s = 0.0;
@@ -39,12 +39,13 @@ float q_trapedozial_rule(float a, float b, int j_max) {
                 }
             }
         }
+        olds = s;
     }
     return s;
 }
 
 float q_simpsons_rule(float a, float b, int j_max) {
-    const float EPS = 0.00000001; //accurancy
+    const float EPS = 0.000001; //accurancy
     const int J_MIN_ITERATION_COUNT = 5;
 
     float s = 0.0;
@@ -59,7 +60,7 @@ float q_simpsons_rule(float a, float b, int j_max) {
         st = trapedozial_rule(a, b, j);
         s = (4.0 * st - ost) / 3.0;
         if (j > J_MIN_ITERATION_COUNT) {
-            if (abs_float(s - os) < EPS * abs_float(os) || (s == 0.0 && os == 0.0) ) {
+            if (abs_float(s - os) < EPS * abs_float(os)) {
                 return s;
             }
         }
@@ -67,27 +68,4 @@ float q_simpsons_rule(float a, float b, int j_max) {
         ost = st;
     }
     return s;
-}
-
-float q_gauss_legendre(float a, float b) {
-    float xr;
-    float xm;
-    float dx;
-    float s;
-
-    const float X[6] = {0.0, 0.1488743389, 0.4333953941, 0.6794095682, 0.8650633666, 0.9739065285};
-    const float W[6] = {0.0, 0.2955242247, 0.2692667193, 0.2190863625, 0.1494513491, 0.0666713443};
-
-    xm = 0.5 * (b + a);
-    xr = 0.5 * (b - a);
-
-    s = 0.0;
-
-    for (unsigned j = 0; j < 5; j++) {
-        dx = xr * X[j];
-        s += W[j] * parameter_function(xm + dx) + parameter_function(xm - dx);
-    }
-
-    float result = s * xr;
-    return result;
 }
